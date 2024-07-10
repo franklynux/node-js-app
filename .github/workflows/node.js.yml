@@ -11,9 +11,9 @@ on:
     branches: [main]
 
 # Defines the jobs that the workflow will execute
-run job:
+jobs:
   # Job identifier, can be any name (here it's 'build')
-  build:
+  build-job:
     # Specifies the type of virtual host environment (runner) to use
     runs-on: ubuntu-latest
 
@@ -51,8 +51,8 @@ run job:
     push: 
        branches: [main]
 
-deploy job:
-  build:
+jobs:
+  deploy-job:
     runs-on: ubuntu-latest
     steps:
 
@@ -75,3 +75,4 @@ deploy job:
 
   # Runs tests as defined in the project's package.json
     run: npm test      
+    name: Run test
