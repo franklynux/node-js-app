@@ -27,6 +27,7 @@ steps:
      deployment_package: deploy.zip
 
 # Runs tests as defined in the project's package.json
+run:  npm test  
 name: Run test
-run:  npm test      
+    
  
