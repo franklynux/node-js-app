@@ -3,9 +3,10 @@ name: Node.js CI
 
 # Specifies when the workflow should be triggered
 on:
+  push: main
   # Also triggers the workflow on 'pull_request' events targeting the 'main' branch
   pull_request:
-    branches: [main]
+    branches: main
 
 # Defines the jobs that the workflow will execute
 jobs:
