@@ -13,6 +13,7 @@
 	"devDependencies": {
 		"jest": "^29.7.0",
 		"webpack": "^5.93.0",
+		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
 		"firebase-tools": "^13.13.3",
