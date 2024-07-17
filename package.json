@@ -2,10 +2,11 @@
 	"name": "devops",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "app.js",
 	"scripts": {
 		"test": "jest",
-		"build": "webpack ./src/app.js -o public/bundle.js"
+		"build": "webpack ./src/app.js -o public/bundle.js",
+		"start": "webpack serve --open"
 	},
 	"keywords": [],
 	"author": "",
@@ -13,10 +14,6 @@
 	"devDependencies": {
 		"jest": "^29.7.0",
 		"webpack": "^5.93.0",
-		"webpack-cli": "^3.3.11"
-	},
-	"dependencies": {
-		"firebase-tools": "^13.13.3",
-		"terser": "^4.6.6"
+		"webpack-cli": "^3.3.12"
 	}
 }
