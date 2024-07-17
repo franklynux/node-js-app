@@ -20,6 +20,8 @@ jobs:
       - # Sets up the specified version of Node.js
         name: Use Node.js 
         uses: actions/setup-node@v2
+        with: 
+            node-version: '14'
         
 
       - # Installs node modules as specified in the project's package-lock.json
@@ -35,7 +37,7 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: MyNodeJSStack
-          template: node_app.yaml
+          template: app.yaml
         
 
       
