@@ -23,10 +23,6 @@ jobs:
         with: 
             node-version: '14'
         
-
-      - # Installs node modules as specified in the project's package-lock.json
-        run: npm ci
-
       - # Runs tests as defined in the project's package.json
         run: npm test
 
