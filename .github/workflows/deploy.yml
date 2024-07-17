@@ -30,12 +30,12 @@ jobs:
 
       - # This command will only run if a build script is defined in the package.json
         run: npm run build
-
-      - name: Deploy to AWS CloudFormation
+      
+      - # Deploys CloudFormation stack using AWS CloudFormation GitHub Action
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-        name: MyNodeJSStack
-        template: node app.yaml
+          name: MyNodeJSStack
+          template: node_app.yaml
         
 
       
