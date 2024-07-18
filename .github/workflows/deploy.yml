@@ -37,6 +37,8 @@ jobs:
         with:
           name: MyNodeJSStack
           template: app.yaml
+          capabilities: CAPABILITY_IAM
+          region: us-east-1 # Add desired region here
         
 
       
