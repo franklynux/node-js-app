@@ -38,9 +38,9 @@ Resources:
           yum install -y gcc-c++ make
           curl -sL https://rpm.nodesource.com/setup_14.x | bash -
           yum install -y nodejs
-          cd /home/ec2-user
+          cd /home/ubuntu
           git clone https://github.com/franklynux/node-js-app.git
-          cd your-app
+          cd node-js-app
           npm install
           npm start
 
