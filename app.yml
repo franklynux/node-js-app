@@ -2,12 +2,12 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
 
   NewKeyPair:
-    Type: 'AWS::EC2::KeyPair'
+    Type: AWS::EC2::KeyPair
     Properties:
       KeyName: mysurekeypair
 
   NodeJsSG:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH and HTTP access
       SecurityGroupIngress:
@@ -22,13 +22,12 @@ Resources:
           VpcId: vpc-0f60fe2cc523bbd9f
 
   ServerForNodeJs:
-    Type: 'AWS::EC2::Instance'
+    Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
       KeyName: !Ref mysurekeypair
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
-      SecurityGroupIds:
-        - !Ref NodeJsSG
+      SecurityGroupIds: !Ref NodeJsSG
       UserData:
         Fn::Base64: 
           #!/bin/bash
