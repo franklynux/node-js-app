@@ -4,12 +4,13 @@ Resources:
   NewKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: mysurekeypair
+      KeyName: keypair-new
 
   NodeJsSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH and HTTP access
+      VpcId: vpc-0f60fe2cc523bbd9f
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -19,22 +20,21 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
-          VpcId: vpc-0f60fe2cc523bbd9f
 
   ServerForNodeJs:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      KeyName: !Ref mysurekeypair
+      KeyName: !Ref keypair-new
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
       SecurityGroupIds: !Ref NodeJsSG
       UserData:
-        Fn::Base64: 
+        Fn::Base64: |
           #!/bin/bash
-          yum update -y
-          yum install -y gcc-c++ make
-          curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-          yum install -y nodejs
+          apt-get update -y
+          apt-get install -y gcc-c++ make
+          curl -sL https://deb.nodesource.com/setup_14.x | bash -
+          apt-get install -y nodejs
           cd /home/ubuntu
           git clone https://github.com/franklynux/node-js-app.git
           cd node-js-app
