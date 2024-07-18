@@ -4,7 +4,7 @@ Resources:
   NewKeyPair:
     Type: 'AWS::EC2::KeyPair'
     Properties:
-      KeyName: node
+      KeyName: mysurekeypair
 
   NodeJsSG:
     Type: 'AWS::EC2::SecurityGroup'
@@ -25,7 +25,7 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: t2.micro
-      KeyName: !Ref node
+      KeyName: !Ref mysurekeypair
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
       SecurityGroupIds:
         - !Ref NodeJsSG
