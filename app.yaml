@@ -1,28 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
-
-  MyS3Bucket:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      BucketName: !Sub '${AWS::StackName}-bucket'
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: 404.html
-
-  MyS3BucketPolicy:
-    Type: 'AWS::S3::BucketPolicy'
-    Properties:
-      Bucket: !Ref MyS3Bucket
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Sid: PublicReadGetObject
-            Effect: Allow
-            Principal: '*'
-            Action: 's3:GetObject'
-            Resource: !Sub 'arn:aws:s3:::${MyS3Bucket}/*'
-
   ServerForNodeJs:
     Type: 'AWS::EC2::Instance'
     Properties:
