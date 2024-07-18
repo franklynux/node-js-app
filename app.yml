@@ -1,25 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
-  ServerForNodeJs:
-    Type: 'AWS::EC2::Instance'
+
+  NewKeyPair:
+    Type: 'AWS::EC2::KeyPair'
     Properties:
-      InstanceType: t2.micro
-      KeyName: ubuntu.pem
-      ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
-      SecurityGroupIds:
-        - !Ref NodeJsSG
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash
-          yum update -y
-          yum install -y gcc-c++ make
-          curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-          yum install -y nodejs
-          cd /home/ubuntu
-          git clone https://github.com/franklynux/node-js-app.git
-          cd node-js-app
-          npm install
-          npm start
+      KeyName: node
 
   NodeJsSG:
     Type: 'AWS::EC2::SecurityGroup'
@@ -34,3 +19,27 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+          VpcId: vpc-0f60fe2cc523bbd9f
+
+  ServerForNodeJs:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref node
+      ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
+      SecurityGroupIds:
+        - !Ref NodeJsSG
+      UserData:
+        Fn::Base64: 
+          #!/bin/bash
+          yum update -y
+          yum install -y gcc-c++ make
+          curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+          yum install -y nodejs
+          cd /home/ubuntu
+          git clone https://github.com/franklynux/node-js-app.git
+          cd node-js-app
+          npm install
+          npm start
+
+  
