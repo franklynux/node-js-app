@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
 
-  NewKeyPair:
-    Type: AWS::EC2::KeyPair
+  keypair-new:
+    Type: 'AWS::EC2::KeyPair'
     Properties:
-      KeyName: keypair-new
+      KeyName: 'keypair-new'
 
   NodeJsSG:
     Type: AWS::EC2::SecurityGroup
