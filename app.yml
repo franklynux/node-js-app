@@ -27,7 +27,8 @@ Resources:
       InstanceType: t2.micro
       KeyName: !Ref KeyPairNew
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
-      SecurityGroupIds: !Ref NodeJsSG
+      SecurityGroupIds: 
+       - !Ref NodeJsSG
 
 Mappings:
   IPRange:
