@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Resources:
 
+Resources:
   KeyPairNew:
     Type: AWS::EC2::KeyPair
     Properties:
@@ -15,11 +15,11 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: 0.0.0.0/0
+          CidrIp: !FindInMap [IPRange, !Ref AWS::Region, SSH]
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          CidrIp: 0.0.0.0/0
+          CidrIp: !FindInMap [IPRange, !Ref AWS::Region, HTTP]
 
   ServerForNodeJs:
     Type: AWS::EC2::Instance
@@ -41,4 +41,12 @@ Resources:
           npm install
           npm start
 
-  
+Mappings:
+  IPRange:
+    us-east-1:
+      SSH: 192.0.2.0/32
+      HTTP: 0.0.0.0/0
+    us-west-2:
+      SSH: 198.51.100.0/32
+      HTTP: 0.0.0.0/0
+    # Add more regions as needed
