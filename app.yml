@@ -28,18 +28,6 @@ Resources:
       KeyName: !Ref KeyPairNew
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
       SecurityGroupIds: !Ref NodeJsSG
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash
-          apt-get update -y
-          apt-get install -y gcc-c++ make
-          curl -sL https://deb.nodesource.com/setup_14.x | bash -
-          apt-get install -y nodejs
-          cd /home/ubuntu
-          git clone https://github.com/franklynux/node-js-app.git
-          cd node-js-app
-          npm install
-          npm start
 
 Mappings:
   IPRange:
@@ -50,3 +38,14 @@ Mappings:
       SSH: 198.51.100.0/32
       HTTP: 0.0.0.0/0
     # Add more regions as needed
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID
+    Value: !Ref ServerForNodeJs
+  PublicIP:
+    Description: Public IP of our instance
+    Value: !GetAtt ServerForNodeJs.PublicIp
+  PublicDNS:
+    Description: Public DNS of our instance
+    Value: !GetAtt ServerForNodeJs.PublicDnsName
