@@ -43,7 +43,7 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: MyNodeJSStack
-          template: app.yaml
+          template: app.yml
           capabilities: CAPABILITY_IAM
           
         
