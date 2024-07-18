@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
 
-  keypair-new:
-    Type: 'AWS::EC2::KeyPair'
+  KeyPairNew:
+    Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: 'keypair-new'
+      KeyName: sure-key-pair
 
   NodeJsSG:
     Type: AWS::EC2::SecurityGroup
@@ -25,7 +25,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      KeyName: !Ref keypair-new
+      KeyName: !Ref KeyPairNew
       ImageId: ami-04a81a99f5ec58529  # Ubuntu, 24.04 LTS
       SecurityGroupIds: !Ref NodeJsSG
       UserData:
