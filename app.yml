@@ -40,6 +40,7 @@ Resources:
             git clone https://github.com/franklynux/node-js-app.git
             cd node-js-app
             npm install
+            npm run build
             npm start
 
       
@@ -47,10 +48,10 @@ Resources:
 Mappings:
   IPRange:
     us-east-1:
-      SSH: 192.0.2.0/32
+      SSH: 0.0.0.0/0
       HTTP: 0.0.0.0/0
     us-west-2:
-      SSH: 198.51.100.0/32
+      SSH: 0.0.0.0/0
       HTTP: 0.0.0.0/0
     # Add more regions as needed
 
