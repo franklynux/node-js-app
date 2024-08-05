@@ -1,0 +1,59 @@
+# Name of the workflow
+name: Node.js CD
+
+# Specifies when the workflow should be triggered
+
+# Defines the jobs that the workflow will execute
+jobs:
+  # Job identifier, can be any name (here it's 'build')
+   deploy:
+    # Specifies the type of virtual host environment (runner) to use
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - # Checks-out your repository under $GITHUB_WORKSPACE, so the job can access it
+        uses: actions/checkout@v2
+
+      - # Sets up the specified version of Node.js
+        name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+        
+      - # Installs node modules as specified in the project's package-lock.json
+        run: npm ci
+
+      - name: Run Linter
+        run: npx eslint .
+        # 'npx eslint .' runs the ESLint tool on all the files in your repository.
+        # ESLint is a static code analysis tool used to identify problematic patterns in JavaScript code.
+      
+      
+      - # Runs tests as defined in the project's package.json
+        run: npm test
+
+      - # This command will only run if a build script is defined in the package.json
+        run: npm run build
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 # Add your desired region here
+
+      - # Deploys CloudFormation stack using AWS CloudFormation GitHub Action
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: MyNodeJSStack
+          template: app.yml
+          capabilities: CAPABILITY_IAM
+          
+        
+
+      
